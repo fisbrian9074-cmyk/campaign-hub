@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import CharacterCard from "../../components/CharacterCard";
+import CharactersGrid from "../../components/CharactersGrid";
 
 // This function reads the markdown files from your computer
 function getCharacters() {
@@ -36,15 +36,7 @@ export default function CharactersPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {characters.map((char) => (
-          <CharacterCard
-            key={char.slug}
-            data={char.data}
-            content={char.content}
-          />
-        ))}
-      </div>
+      <CharactersGrid characters={characters} />
     </main>
   );
 }

@@ -22,13 +22,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${crimson.variable}`}>
-      <head>
+      <body className="bg-slate-50 text-slate-900 min-h-screen font-sans">
         <Script
           src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         />
-      </head>
-      <body className="bg-slate-50 text-slate-900 min-h-screen font-sans">
         <Navbar />
         {children}
       </body>

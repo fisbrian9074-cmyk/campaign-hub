@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import LocationCard from "../../components/LocationCard";
+import LocationsGrid from "../../components/LocationsGrid";
 
 function getLocations() {
   const directory = path.join(process.cwd(), "src/content/locations");
@@ -30,11 +30,7 @@ export default function LocationsPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {locations.map((loc) => (
-          <LocationCard key={loc.slug} data={loc.data} content={loc.content} />
-        ))}
-      </div>
+      <LocationsGrid locations={locations} />
     </main>
   );
 }

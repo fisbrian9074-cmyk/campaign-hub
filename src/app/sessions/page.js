@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import ReactMarkdown from "react-markdown";
+import SessionsGrid from "../../components/SessionsGrid";
 
 function getSessions() {
   const directory = path.join(process.cwd(), "src/content/sessions");
@@ -23,53 +23,17 @@ export default function SessionsPage() {
   const sessions = getSessions();
 
   return (
-    <main className="min-h-screen max-w-4xl mx-auto p-8">
+    <main className="min-h-screen max-w-6xl mx-auto p-8">
       <div className="mb-12 border-b border-slate-200 pb-6">
         <h1 className="text-4xl font-bold font-serif text-sky-700 mb-2">
           Campaign Journal
         </h1>
         <p className="text-slate-600 text-lg">
-          The official record of our party's triumphs and blunders.
+          The official record of our party&apos;s triumphs and blunders.
         </p>
       </div>
 
-      <div className="space-y-12">
-        {sessions.map((session) => (
-          <article
-            key={session.slug}
-            className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm"
-          >
-            {/* Session Header */}
-            <div className="bg-slate-100 p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <span className="text-sky-600 font-bold uppercase tracking-wider text-sm mb-1 block">
-                  Session {session.data.session_number}
-                </span>
-                <h2 className="text-2xl font-bold font-serif text-slate-900">
-                  {session.data.title}
-                </h2>
-              </div>
-              <div className="text-slate-500 text-sm font-medium">
-                {new Date(session.data.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </div>
-            </div>
-
-            {/* Session Body */}
-            <div className="p-6">
-              <p className="text-amber-600 font-medium italic mb-6 border-l-2 border-amber-400 pl-4">
-                {session.data.summary}
-              </p>
-              <div className="text-slate-700 prose prose-slate prose-p:leading-relaxed max-w-none">
-                <ReactMarkdown>{session.content}</ReactMarkdown>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+      <SessionsGrid sessions={sessions} />
     </main>
   );
 }

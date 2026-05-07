@@ -34,9 +34,27 @@ function getSessions() {
   return sessions.sort((a, b) => b.data.session_number - a.data.session_number);
 }
 
+function getCharacters() {
+  const directory = path.join(process.cwd(), "src/content/characters");
+  if (!fs.existsSync(directory)) return [];
+
+  const filenames = fs.readdirSync(directory);
+  return filenames.map((filename) => {
+    const filePath = path.join(directory, filename);
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    const { data } = matter(fileContent);
+    return { data, slug: filename.replace(".md", "") };
+  });
+}
+
 export default function HomePage() {
   const slides = getCarouselSlides();
   const recentSessions = getSessions().slice(0, 3);
+  const playerCharacters = getCharacters().filter(
+    (character) =>
+      character.data.status?.toLowerCase() === "alive" &&
+      character.data.type?.toLowerCase().includes("player"),
+  );
 
   return (
     <main className="min-h-screen max-w-7xl mx-auto p-6 lg:p-8 space-y-12">
@@ -46,12 +64,12 @@ export default function HomePage() {
             Campaign Codex
           </p>
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-slate-900 leading-tight">
-            The story of your party begins here.
+            This is our story | This is Faerûn
           </h1>
           <p className="mt-4 text-base md:text-lg text-slate-600 max-w-2xl">
-            Explore your world, revisit the latest sessions, and watch the
-            campaign unfold with a rotating story carousel and a quick overview
-            of the newest journal entries.
+            Thank you zay for creating this wonderful fantasy word for us. It
+            has been so much fun each week getting together and playing D&D.
+            Also, thanks for letting me nerd out making this site.
           </p>
         </div>
 
@@ -65,9 +83,9 @@ export default function HomePage() {
               Recent Campaign Highlights
             </h2>
             <p className="text-slate-600 leading-relaxed">
-              Catch up with the latest sessions from the journal. Each tile
-              shows the newest scenes, dates, and summaries so your campaign
-              feels alive from the first page.
+              Below you will find the latest copy of my notes from the session.
+              Feel free to send me yours and I will add them to the page for all
+              to reference
             </p>
           </div>
 
@@ -95,43 +113,64 @@ export default function HomePage() {
                 <p className="text-slate-600 text-sm leading-relaxed min-h-[4.5rem]">
                   {session.data.summary}
                 </p>
+                <div className="mt-4">
+                  <Link
+                    href="/sessions"
+                    className="inline-flex items-center justify-center rounded-full bg-sky-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-sky-700"
+                  >
+                    Read More
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-slate-200 bg-slate-950 text-slate-100 p-6 shadow-xl">
+        <aside className="rounded-3xl border border-slate-200 bg-white text-slate-900 p-6 shadow-xl">
           <div className="flex items-start justify-between gap-4 mb-6">
             <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-amber-300 font-semibold mb-2">
-                Journal Feed
+              <p className="text-sm uppercase tracking-[0.35em] text-sky-600 font-semibold mb-2">
+                Player Roster
               </p>
-              <h2 className="text-2xl font-bold font-serif">Latest Sessions</h2>
+              <h2 className="text-2xl font-bold font-serif">
+                Player Characters
+              </h2>
             </div>
             <Link
-              href="/sessions"
-              className="rounded-full bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 hover:bg-amber-400 transition"
+              href="/characters"
+              className="rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-700 transition"
             >
-              View all
+              See all
             </Link>
           </div>
           <div className="space-y-4">
-            {recentSessions.map((session) => (
-              <div
-                key={session.slug}
-                className="rounded-3xl border border-slate-800 bg-slate-900 p-4"
-              >
-                <p className="text-xs uppercase tracking-[0.24em] text-slate-500 mb-2">
-                  Session {session.data.session_number}
-                </p>
-                <p className="text-base font-semibold text-white mb-2">
-                  {session.data.title}
-                </p>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  {session.data.summary}
-                </p>
+            {playerCharacters.length > 0 ? (
+              playerCharacters.map((character) => (
+                <div
+                  key={character.slug}
+                  className="rounded-3xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
+                      {character.data.status}
+                    </p>
+                    <span className="rounded-full bg-sky-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-sky-700">
+                      {character.data.type}
+                    </span>
+                  </div>
+                  <p className="text-base font-semibold text-slate-900 mb-1">
+                    {character.data.name}
+                  </p>
+                  <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
+                    {character.data.subtitle}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-slate-500">
+                No active player characters available yet.
               </div>
-            ))}
+            )}
           </div>
         </aside>
       </section>
