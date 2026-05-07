@@ -1,0 +1,92 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "sessions"
+    label: "Session Recaps"
+    folder: "src/content/sessions"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Session Title", name: "title", widget: "string" }
+      - { label: "Session Number", name: "session_number", widget: "number" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - {
+          label: "Summary",
+          name: "summary",
+          widget: "text",
+          hint: "A short 2-3 sentence teaser.",
+        }
+      - { label: "Full Recap", name: "body", widget: "markdown" }
+
+  - name: "characters"
+    label: "Characters"
+    folder: "src/content/characters"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - {
+          label: "Portrait",
+          name: "portrait",
+          widget: "image",
+          required: false,
+        }
+      - {
+          label: "Type",
+          name: "type",
+          widget: "select",
+          options: ["Player Character", "NPC"],
+        }
+      - {
+          label: "Subtitle",
+          name: "subtitle",
+          widget: "string",
+          hint: "e.g., Level 5 Tiefling Warlock or Shady Tavern Keeper",
+        }
+      - {
+          label: "Status",
+          name: "status",
+          widget: "select",
+          options: ["Alive", "Dead", "Missing"],
+        }
+      - { label: "Faction", name: "faction", widget: "string", required: false }
+      - { label: "Backstory / Lore", name: "body", widget: "markdown" }
+
+  - name: "locations"
+    label: "Locations"
+    folder: "src/content/locations"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - {
+          label: "Image / Map",
+          name: "image",
+          widget: "image",
+          required: false,
+        }
+      - {
+          label: "Type",
+          name: "type",
+          widget: "select",
+          options: ["City", "Town", "Village", "Dungeon", "Region", "Landmark"],
+        }
+      - {
+          label: "Region",
+          name: "region",
+          widget: "string",
+          hint: "What larger area is this inside of? (e.g., The Sword Coast)",
+          required: false,
+        }
+      - {
+          label: "Danger Level",
+          name: "danger_level",
+          widget: "select",
+          options: ["Safe", "Moderate", "Dangerous", "Deadly", "Unknown"],
+        }
+      - { label: "Lore / Description", name: "body", widget: "markdown" }
