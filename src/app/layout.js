@@ -1,29 +1,41 @@
-import "./globals.css";
-import { Inter, Crimson_Text } from "next/font/google";
-import { ThemeProvider } from "../components/theme-provider";
 import Navbar from "../components/Navbar";
+import Script from "next/script";
+import { Inter, Crimson_Text } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-const crimson = Crimson_Text({
+// 1. Load the custom fonts from your Tailwind config
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  variable: "--font-inter",
+});
+
+const crimson = Crimson_Text({
+  weight: ["400", "600", "700"],
+  subsets: ["latin"],
   variable: "--font-crimson",
 });
 
+// 2. Site Metadata
 export const metadata = {
   title: "D&D Campaign Hub",
   description: "A digital hub for our ongoing adventures.",
 };
 
+// 3. The Root Layout
 export default function RootLayout({ children }) {
   return (
-    // suppressHydrationWarning is required by next-themes
-    <html lang="en" suppressHydrationWarning>
-      <body className="font-sans bg-scholar-50 dark:bg-astral-950 text-astral-900 dark:text-scholar-50 min-h-screen transition-colors duration-300">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          {children}
-        </ThemeProvider>
+    <html lang="en" className={`${inter.variable} ${crimson.variable}`}>
+      <head>
+        {/* Netlify Identity Widget to catch email invites on the homepage */}
+        <Script
+          src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+          strategy="beforeInteractive"
+        />
+      </head>
+      {/* We apply the font-sans class here so Inter is the default text everywhere */}
+      <body className="bg-astral-950 text-slate-200 min-h-screen font-sans">
+        <Navbar />
+        {children}
       </body>
     </html>
   );
