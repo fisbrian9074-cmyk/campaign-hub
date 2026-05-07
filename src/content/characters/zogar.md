@@ -1,11 +1,8 @@
 ---
-name: Zogar the Broken
-type: NPC
-subtitle: Exiled Orc Warlord
+name: Ellias Viremont
+type: Player Character
+subtitle: Former Legal Assistant of the Tchazzum Estate
 status: Alive
-faction: The Shattered Tusk
+faction: The Heros of Berdusk, Elturel
 ---
-
-Zogar lost his arm during the Siege of Red-Hold. He now spends his days in the shadowed corners of the tavern, trading war stories for cheap ale.
-
-If the party buys him a drink, he might just reveal the secret entrance to the goblin camp.
+The former legal assistant of the Tchazzum estate, he was shocked to learn that Apollo Tchazzum has potential dealings with a local fanatical cult. After being kicked out of the estate, Ellias joined up with Apollos son Orpheus and his pal Pixeltor, a wizard from the frostfang forrest, and set out on a grand adventure full of fear, fists, ale, and of course laughs with friends along the way.
