@@ -28,10 +28,10 @@ export default function CharactersPage() {
   return (
     <main className="min-h-screen max-w-6xl mx-auto p-8">
       <div className="mb-10">
-        <h1 className="text-4xl font-bold font-serif text-arcane-400 mb-2">
+        <h1 className="text-4xl font-bold font-serif text-sky-700 mb-2">
           Dramatis Personae
         </h1>
-        <p className="text-astral-900 dark:text-scholar-50 text-lg">
+        <p className="text-slate-700 text-lg">
           The allies, enemies, and bystanders of our campaign.
         </p>
       </div>

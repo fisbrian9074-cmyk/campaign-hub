@@ -22,10 +22,10 @@ export default function LocationsPage() {
   return (
     <main className="min-h-screen max-w-6xl mx-auto p-8">
       <div className="mb-10">
-        <h1 className="text-4xl font-bold font-serif text-arcane-400 mb-2">
+        <h1 className="text-4xl font-bold font-serif text-sky-700 mb-2">
           Atlas of the Realm
         </h1>
-        <p className="text-slate-400 text-lg">
+        <p className="text-slate-600 text-lg">
           Cities, dungeons, and landmarks we have uncovered.
         </p>
       </div>

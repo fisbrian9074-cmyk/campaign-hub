@@ -24,11 +24,11 @@ export default function SessionsPage() {
 
   return (
     <main className="min-h-screen max-w-4xl mx-auto p-8">
-      <div className="mb-12 border-b border-slate-800 pb-6">
-        <h1 className="text-4xl font-bold font-serif text-arcane-400 mb-2">
+      <div className="mb-12 border-b border-slate-200 pb-6">
+        <h1 className="text-4xl font-bold font-serif text-sky-700 mb-2">
           Campaign Journal
         </h1>
-        <p className="text-slate-400 text-lg">
+        <p className="text-slate-600 text-lg">
           The official record of our party's triumphs and blunders.
         </p>
       </div>
@@ -37,19 +37,19 @@ export default function SessionsPage() {
         {sessions.map((session) => (
           <article
             key={session.slug}
-            className="bg-astral-900 rounded-xl border-2 border-brass-600/30 overflow-hidden shadow-xl"
+            className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm"
           >
             {/* Session Header */}
-            <div className="bg-astral-950 p-6 border-b border-brass-600/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="bg-slate-100 p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <span className="text-arcane-400 font-bold uppercase tracking-wider text-sm mb-1 block">
+                <span className="text-sky-600 font-bold uppercase tracking-wider text-sm mb-1 block">
                   Session {session.data.session_number}
                 </span>
-                <h2 className="text-2xl font-bold font-serif text-scholar-50">
+                <h2 className="text-2xl font-bold font-serif text-slate-900">
                   {session.data.title}
                 </h2>
               </div>
-              <div className="text-scholar-300 text-sm font-medium">
+              <div className="text-slate-500 text-sm font-medium">
                 {new Date(session.data.date).toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -60,10 +60,10 @@ export default function SessionsPage() {
 
             {/* Session Body */}
             <div className="p-6">
-              <p className="text-brass-500 font-medium italic mb-6 border-l-2 border-brass-600 pl-4">
+              <p className="text-amber-600 font-medium italic mb-6 border-l-2 border-amber-400 pl-4">
                 {session.data.summary}
               </p>
-              <div className="text-scholar-50 prose prose-invert prose-p:leading-relaxed max-w-none">
+              <div className="text-slate-700 prose prose-slate prose-p:leading-relaxed max-w-none">
                 <ReactMarkdown>{session.content}</ReactMarkdown>
               </div>
             </div>
