@@ -6,6 +6,28 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 collections:
+  - name: "carousel"
+    label: "Hero Carousel"
+    folder: "src/content/carousel"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {
+          label: "Title (Internal)",
+          name: "title",
+          widget: "string",
+          hint: "Just for you to identify this image.",
+        }
+      - { label: "Hero Image", name: "image", widget: "image" }
+      - {
+          label: "Caption / Quote",
+          name: "caption",
+          widget: "string",
+          required: false,
+          hint: "Optional text to overlay on the image.",
+        }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+
   - name: "sessions"
     label: "Session Recaps"
     folder: "src/content/sessions"
@@ -30,6 +52,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Name", name: "name", widget: "string" }
+      - { label: "Date Added", name: "date", widget: "datetime" }
       - {
           label: "Portrait",
           name: "portrait",
@@ -46,7 +69,7 @@ collections:
           label: "Subtitle",
           name: "subtitle",
           widget: "string",
-          hint: "e.g., Level 5 Tiefling Warlock or Shady Tavern Keeper",
+          hint: "e.g., Level 5 Tiefling Warlock",
         }
       - {
           label: "Status",
@@ -64,6 +87,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Name", name: "name", widget: "string" }
+      - { label: "Date Added", name: "date", widget: "datetime" }
       - {
           label: "Image / Map",
           name: "image",
@@ -76,13 +100,7 @@ collections:
           widget: "select",
           options: ["City", "Town", "Village", "Dungeon", "Region", "Landmark"],
         }
-      - {
-          label: "Region",
-          name: "region",
-          widget: "string",
-          hint: "What larger area is this inside of? (e.g., The Sword Coast)",
-          required: false,
-        }
+      - { label: "Region", name: "region", widget: "string", required: false }
       - {
           label: "Danger Level",
           name: "danger_level",
